@@ -382,9 +382,6 @@ if __name__ == '__main__':
 		tf.keras.layers.Conv2D(filters=64, kernel_size=[3,3], activation=tf.nn.relu),
 		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
-		#tf.keras.layers.Conv2D(filters=128, kernel_size=[3,3], activation=tf.nn.relu),
-		#tf.keras.layers.Conv2D(filters=128, kernel_size= [3,3], activation=tf.nn.relu),
-		#tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
 		tf.keras.layers.Flatten(),
 		tf.keras.layers.Dense(512, activation=tf.nn.relu),
 		tf.keras.layers.Dense(len(labels),activation=tf.nn.softmax)
