@@ -354,7 +354,7 @@ if __name__ == '__main__':
 				# result_path  = os.path.join('temp', str(image_written) + ".jpg")
 				# cv2.imwrite(result_path, region)
 				# image_written += 1
-				region = cv2.resize(region, (224,224))
+				region = cv2.resize(region, (128,128))
 				test_data.append(region)
 
 
