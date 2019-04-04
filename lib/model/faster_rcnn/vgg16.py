@@ -18,8 +18,8 @@ import pdb
 
 class vgg16(_fasterRCNN):
   def __init__(self, classes, pretrained=False, class_agnostic=False):
-    self.model_path = 'models/vgg16/wider_face/faster_rcnn_1_1_12879.pth'
-    #self.model_path = 'data/pretrained_model/vgg16_caffe.pth'
+    #self.model_path = 'models/vgg16/wider_face/faster_rcnn_1_1_12879.pth'
+    self.model_path = 'data/pretrained_model/vgg16_caffe.pth'
     #self.model_path = 'convert_torch_to_pytorch/VGG_FACE.pth'
     self.dout_base_model = 512
     self.pretrained = pretrained
