@@ -387,6 +387,7 @@ if __name__ == '__main__':
       'class_agnostic': args.class_agnostic,
     }, save_name)
     print('save model: {}'.format(save_name))
+    torch.save(model.state_dict(), 'data')
 
   if args.use_tfboard:
     logger.close()
