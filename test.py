@@ -367,14 +367,18 @@ if __name__ == '__main__':
 	for i in range(len(test_data)):
 		region = test_data[i]
 		results = result[i]
-		y = fig.add_subplot(18,6,len(test_data))
+		y = fig.add_subplot(40,6,len(test_data))
 		label = ''
-		if(results[0] > results[1] and results[0] > results[2]):
+		if(results[0] > results[1] and results[0] > results[2] and results[0] > results[3] and results[0] > results[4]):
 			label = 'ram'
-		elif(results[1] > results[0] and results[1] > results[2]):
+		elif(results[1] > results[0] and results[1] > results[2] and results[1] > results[3] and results[1] > results[4]):
 			label = 'shyam'
-		else:
+		elif(results[2] > results[0] and results[2] > results[1] and results[2] > results[3] and results[2] > results[4]):
 			label = 'krishna'
+		elif(results[3] > results[0] and results[3] > results[1] and results[3] > results[2] and results[3] > results[4]):
+			label = 'hari'
+		else:
+			label = 'unknown'
 		result_path  = os.path.join('results', label + str(i) + ".jpg")
 		cv2.imwrite(result_path, region)
 		
