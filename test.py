@@ -367,7 +367,7 @@ if __name__ == '__main__':
 	for i in range(len(test_data)):
 		region = test_data[i]
 		results = result[i]
-		y = fig.add_subplot(30,6,len(test_data))
+		y = fig.add_subplot(50,6,len(test_data))
 		label = ''
 		if(results[0] > results[1] and results[0] > results[2] and results[0] > results[3] and results[0] > results[4]):
 			label = 'ram'
