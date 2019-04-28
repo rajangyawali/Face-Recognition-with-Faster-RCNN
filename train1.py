@@ -360,7 +360,7 @@ if __name__ == '__main__':
 					# result_path  = os.path.join('temp', str(image_written) + ".jpg")
 					# cv2.imwrite(result_path, region)
 					# image_written += 1
-					region = cv2.resize(region, (128,128))
+					region = cv2.resize(region, (256,256))
 					train_data.append(region)
 					train_labels.append(label)
 		
