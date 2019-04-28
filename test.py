@@ -388,7 +388,7 @@ if __name__ == '__main__':
 		#elif(results[8] > results[0] and results[8] > results[1] and results[8] > results[2] and results[8] > results[3] and results[8] > results[4] and results[8] > results[5] and results[8] > results[6] and results[8] > results[7] and results[8] > results[9]):
 			#label = 'hasina'
 		else:
-			label = 'unknown'
+			label = 'raman'
 		result_path  = os.path.join('results', label + str(i) + ".jpg")
 		cv2.imwrite(result_path, region)
 		
