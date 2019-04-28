@@ -259,7 +259,8 @@ if __name__ == '__main__':
 			total_tic = time.time()
 			im_file = os.path.join(current_dir, image)
 			# im = cv2.imread(im_file)
-			im_in = np.array(imread(im_file))
+			#im_in = np.array(imread(im_file))
+			im_in = np.array(cv2.imread(im_file))
 			if len(im_in.shape) == 2:
 				im_in = im_in[:,:,np.newaxis]
 				im_in = np.concatenate((im_in,im_in,im_in), axis=2)
