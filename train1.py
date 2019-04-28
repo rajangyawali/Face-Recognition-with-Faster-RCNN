@@ -21,6 +21,9 @@ from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
 import tensorflow as tf
+from keras import layers
+from keras import models 
+
 
 import torchvision.transforms as transforms
 import torchvision.datasets as dset
@@ -241,7 +244,7 @@ if __name__ == '__main__':
 	# 	num_images = len(imglist)
 	train_data = []
 	train_labels = []
-	faces = [ 'ram', 'shyam','krishna','hari','raman','rohan','rita','gita','hasina','unknown']
+	faces = [ 'ram', 'shyam','krishna','hari','rita','gita','hasina','unknown']
 	labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 	imglist = []
 	image_written = 0
@@ -369,28 +372,26 @@ if __name__ == '__main__':
 	train_labels = np.asarray(train_labels)
 	print(train_data.shape)
 	print(train_labels.shape)
+	
+	model = models.Sequential()
+	model.add(layers.Conv2D(32,(3,3),activation='relu', input_shape = (128,128,3)))
+	model.add(layers.MaxPooling2D((2,2)))
+	model.add(layers.Conv2D(32,(3,3),activation='relu'))
+	model.add(layers.MaxPooling2D((2,2)))
+	model.add(layers.Conv2D(64,(3,3),activation='relu'))
+	model.add(layers.MaxPooling2D((2,2)))
+	model.add(layers.Conv2D(64,(3,3),activation='relu'))
+	model.add(layers.MaxPooling2D((2,2)))
+	model.add(layers.Conv2D(128,(3,3),activation='relu'))
+	model.add(layers.MaxPooling2D((2,2)))
+	model.add(layers.Conv2D(128,(3,3),activation='relu'))
+	model.add(layers.MaxPooling2D((2,2)))
+	model.add(layers.Flatten())
+	model.add(layers.Dense(512,activation='relu'))
+	model.add(layers.Dense(len(labels),activation='softmax'))
+	print(model.summary())
 
-	model = tf.keras.models.Sequential([
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
-		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
-		tf.keras.layers.Conv2D(filters=64, kernel_size=[3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
-    		
-		tf.keras.layers.Flatten(),
-		tf.keras.layers.Dense(512, activation=tf.nn.relu),
-		tf.keras.layers.Dense(len(labels),activation=tf.nn.softmax)
-	])
+	
 
 	model.compile(
 		optimizer='adam',
