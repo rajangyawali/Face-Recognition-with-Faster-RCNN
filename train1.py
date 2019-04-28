@@ -391,10 +391,7 @@ if __name__ == '__main__':
 		tf.keras.layers.Dense(512, activation=tf.nn.relu),
 		tf.keras.layers.Dense(len(labels),activation=tf.nn.softmax)
 	])
-	print(model.summary())
-
 	
-
 	model.compile(
 		optimizer='adam',
 		loss='sparse_categorical_crossentropy',
@@ -408,3 +405,4 @@ if __name__ == '__main__':
 		shuffle=True
 	)
 	model.save('./cnn.h5')
+	print(model.summary())
