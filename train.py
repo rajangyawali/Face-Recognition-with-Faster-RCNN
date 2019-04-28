@@ -241,8 +241,8 @@ if __name__ == '__main__':
 	# 	num_images = len(imglist)
 	train_data = []
 	train_labels = []
-	faces = [ 'ram', 'shyam','krishna','hari','unknown']
-	labels = [0, 1, 2, 3, 4]
+	faces = [ 'ram', 'shyam','krishna','hari','raman','rohan','rita','gita','hasina','unknown']
+	labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 	imglist = []
 	image_written = 0
 	for face, label in zip(faces, labels):
@@ -396,7 +396,7 @@ if __name__ == '__main__':
 	model.fit(
 		train_data,
 		train_labels,
-		epochs=17,
+		epochs=30,
 		shuffle=True
 	)
 	model.save('./cnn.h5')
