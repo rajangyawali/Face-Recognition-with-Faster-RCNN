@@ -241,8 +241,8 @@ if __name__ == '__main__':
 	# 	num_images = len(imglist)
 	train_data = []
 	train_labels = []
-	faces = [ 'ram', 'shyam','krishna','hari','rita','gita','hasina','raman']
-	labels = [0, 1, 2, 3, 4, 5, 6, 7]
+	faces = [ 'ram', 'shyam','krishna','hari','rita','raman']
+	labels = [0, 1, 2, 3, 4, 5]
 	imglist = []
 	image_written = 0
 	for face, label in zip(faces, labels):
@@ -373,18 +373,14 @@ if __name__ == '__main__':
 	model = tf.keras.models.Sequential([
 		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
 		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
-		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
 		tf.keras.layers.Conv2D(filters=64, kernel_size=[3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
 		tf.keras.layers.Flatten(),
@@ -401,7 +397,7 @@ if __name__ == '__main__':
 	model.fit(
 		train_data,
 		train_labels,
-		epochs=40,
+		epochs=25,
 		shuffle=True
 	)
 	model.save('./cnn.h5')
