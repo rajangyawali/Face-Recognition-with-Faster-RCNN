@@ -25,6 +25,7 @@ import matplotlib.pyplot as plt
 
 import torchvision.transforms as transforms
 import torchvision.datasets as dset
+from PIL import Image
 from scipy.misc import imread
 from roi_data_layer.roidb import combined_roidb
 from roi_data_layer.roibatchLoader import roibatchLoader
@@ -355,7 +356,9 @@ if __name__ == '__main__':
 				# result_path  = os.path.join('temp', str(image_written) + ".jpg")
 				# cv2.imwrite(result_path, region)
 				# image_written += 1
-				region = cv2.resize(region, (128,128))
+				#region = cv2.resize(region, (128,128))
+				im = Image.open(region)
+                regiom = im.resize((128,128), Image.ANTIALIAS)
 				test_data.append(region)
 
 
