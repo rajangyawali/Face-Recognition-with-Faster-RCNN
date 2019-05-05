@@ -267,7 +267,7 @@ if __name__ == '__main__':
 		elif (word_label == 'hari'):
 			test_label = [0,0,0,1,0]
 		else:
-			test_label = [0,0,0,0,0,1]
+			test_label = [0,0,0,0,1]
 		test_score.append(test_label)
 		im_file = os.path.join(current_dir, image)
 		# im = cv2.imread(im_file)
