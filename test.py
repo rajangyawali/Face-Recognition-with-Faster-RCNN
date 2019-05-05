@@ -248,12 +248,27 @@ if __name__ == '__main__':
 	current_dir = 'test_data'
 	images = os.listdir(current_dir)
 	count  = 0
+	word_label = ''
+	test_label = []
+	test_score = []
 	print('Loaded Photo: {} images.'.format(len(images)))
 	for image in images:
 		count += 1
 		# if(count > 10):
 		# 	break
 		total_tic = time.time()
+		word_label = image.split('_')[0]
+		if (word_label == 'ram'):
+			test_label = [1,0,0,0,0]
+		elif (word_label == 'shyam'):
+			test_label = [0,1,0,0,0]
+		elif (word_label == 'krishna'):
+			test_label = [0,0,1,0,0]
+		elif (word_label == 'hari'):
+			test_label = [0,0,0,1,0]
+		else:
+			test_label = [0,0,0,0,0,1]
+		test_score.append(test_label)
 		im_file = os.path.join(current_dir, image)
 		# im = cv2.imread(im_file)
 		im_in = np.array(imread(im_file))
@@ -359,11 +374,12 @@ if __name__ == '__main__':
 				region = cv2.resize(region, (128,128))
 				test_data.append(region)
 
-
+	print(test_score)
 	test_data = np.asarray(test_data)
 	print(test_data.shape)
 	model  = tf.keras.models.load_model('./cnn.h5')
 	result  = model.predict(test_data)
+	print(result)
 	fig=plt.figure()
 	for i in range(len(test_data)):
 		region = test_data[i]
