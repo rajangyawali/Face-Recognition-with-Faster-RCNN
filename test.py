@@ -369,24 +369,14 @@ if __name__ == '__main__':
 		results = result[i]
 		y = fig.add_subplot(50,6,len(test_data))
 		label = ''
-		if(results[0] > results[1] and results[0] > results[2] and results[0] > results[3] and results[0] > results[4] and results[0] > results[5] and results[0] > results[6] and results[0] > results[7] and results[0] > results[8] and results[0] > results[9]):
+		if(results[0] > results[1] and results[0] > results[2] and results[0] > results[3] and results[0] > results[4]):
 			label = 'ram'
-		elif(results[1] > results[0] and results[1] > results[2] and results[1] > results[3] and results[1] > results[4] and results[1] > results[5] and results[1] > results[6] and results[1] > results[7] and results[1] > results[8] and results[1] > results[9]):
+		elif(results[1] > results[0] and results[1] > results[2] and results[1] > results[3] and results[1] > results[4]):
 			label = 'shyam'
-		elif(results[2] > results[0] and results[2] > results[1] and results[2] > results[3] and results[2] > results[4] and results[2] > results[5] and results[2] > results[6] and results[2] > results[7] and results[2] > results[8] and results[2] > results[9]):
+		elif(results[2] > results[0] and results[2] > results[1] and results[2] > results[3] and results[2] > results[4]):
 			label = 'krishna'
-		elif(results[3] > results[0] and results[3] > results[1] and results[3] > results[2] and results[3] > results[4] and results[3] > results[5] and results[3] > results[6] and results[3] > results[7] and results[3] > results[8] and results[3] > results[9]):
+		elif(results[3] > results[0] and results[3] > results[1] and results[3] > results[2] and results[3] > results[4]):
 			label = 'hari'
-		elif(results[4] > results[0] and results[4] > results[1] and results[4] > results[2] and results[4] > results[3] and results[4] > results[5] and results[4] > results[6] and results[4] > results[7] and results[4] > results[8] and results[4] > results[9]):
-			label = 'raman'
-		elif(results[5] > results[0] and results[5] > results[1] and results[3] > results[2] and results[5] > results[3] and results[5] > results[4] and results[5] > results[6] and results[5] > results[7] and results[5] > results[8] and results[5] > results[9]):
-			label = 'rohan'
-		elif(results[6] > results[0] and results[6] > results[1] and results[3] > results[2] and results[6] > results[3] and results[6] > results[4] and results[6] > results[5] and results[6] > results[7] and results[6] > results[8] and results[6] > results[9]):
-			label = 'rita'
-		elif(results[7] > results[0] and results[7] > results[1] and results[7] > results[2] and results[7] > results[3] and results[7] > results[4] and results[7] > results[5] and results[7] > results[6] and results[7] > results[8] and results[7] > results[9]):
-			label = 'gita'
-		elif(results[8] > results[0] and results[8] > results[1] and results[8] > results[2] and results[8] > results[3] and results[8] > results[4] and results[8] > results[5] and results[8] > results[6] and results[8] > results[7] and results[8] > results[9]):
-			label = 'hasina'
 		else:
 			label = 'unknown'
 		result_path  = os.path.join('results', label + str(i) + ".jpg")
