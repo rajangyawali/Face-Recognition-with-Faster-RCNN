@@ -25,7 +25,6 @@ import matplotlib.pyplot as plt
 
 import torchvision.transforms as transforms
 import torchvision.datasets as dset
-from PIL import Image
 from scipy.misc import imread
 from roi_data_layer.roidb import combined_roidb
 from roi_data_layer.roibatchLoader import roibatchLoader
@@ -248,27 +247,12 @@ if __name__ == '__main__':
 	current_dir = 'test_data'
 	images = os.listdir(current_dir)
 	count  = 0
-	word_label = ''
-	test_label = []
-	test_score = []
 	print('Loaded Photo: {} images.'.format(len(images)))
 	for image in images:
 		count += 1
 		# if(count > 10):
 		# 	break
 		total_tic = time.time()
-		word_label = image.split('_')[0]
-		if (word_label == 'ram'):
-			test_label = [1,0,0,0,0]
-		elif (word_label == 'shyam'):
-			test_label = [0,1,0,0,0]
-		elif (word_label == 'krishna'):
-			test_label = [0,0,1,0,0]
-		elif (word_label == 'hari'):
-			test_label = [0,0,0,1,0]
-		else:
-			test_label = [0,0,0,0,1]
-		test_score.append(test_label)
 		im_file = os.path.join(current_dir, image)
 		# im = cv2.imread(im_file)
 		im_in = np.array(imread(im_file))
@@ -289,10 +273,10 @@ if __name__ == '__main__':
 		im_data_pt = im_data_pt.permute(0, 3, 1, 2)
 		im_info_pt = torch.from_numpy(im_info_np)
 
-		im_data.resize_(im_data_pt.size()).copy_(im_data_pt)
-		im_info.resize_(im_info_pt.size()).copy_(im_info_pt)
-		gt_boxes.resize_(1, 1, 5).zero_()
-		num_boxes.resize_(1).zero_()
+		im_data.data.resize_(im_data_pt.size()).copy_(im_data_pt)
+		im_info.data.resize_(im_info_pt.size()).copy_(im_info_pt)
+		gt_boxes.data.resize_(1, 1, 5).zero_()
+		num_boxes.data.resize_(1).zero_()
 
 		# pdb.set_trace()
 		det_tic = time.time()
@@ -371,29 +355,40 @@ if __name__ == '__main__':
 				# result_path  = os.path.join('temp', str(image_written) + ".jpg")
 				# cv2.imwrite(result_path, region)
 				# image_written += 1
-				region = cv2.resize(region, (128,128))
+				region = cv2.resize(region, (256,256))
 				test_data.append(region)
 
-	print(test_score)
+
 	test_data = np.asarray(test_data)
 	print(test_data.shape)
 	model  = tf.keras.models.load_model('./cnn.h5')
 	result  = model.predict(test_data)
-	print(result)
+	y_pred_keras = keras_model.predict(X_test).ravel()
+	fpr_keras, tpr_keras, thresholds_keras = roc_curve(y_test, y_pred_keras)
 	fig=plt.figure()
 	for i in range(len(test_data)):
 		region = test_data[i]
 		results = result[i]
 		y = fig.add_subplot(50,6,len(test_data))
 		label = ''
-		if(results[0] > results[1] and results[0] > results[2] and results[0] > results[3] and results[0] > results[4]):
+		if(results[0] > results[1] and results[0] > results[2] and results[0] > results[3] and results[0] > results[4] and results[0] > results[5] and results[0] > results[6] and results[0] > results[7] and results[0] > results[8] and results[0] > results[9]):
 			label = 'ram'
-		elif(results[1] > results[0] and results[1] > results[2] and results[1] > results[3] and results[1] > results[4]):
+		elif(results[1] > results[0] and results[1] > results[2] and results[1] > results[3] and results[1] > results[4] and results[1] > results[5] and results[1] > results[6] and results[1] > results[7] and results[1] > results[8] and results[1] > results[9]):
 			label = 'shyam'
-		elif(results[2] > results[0] and results[2] > results[1] and results[2] > results[3] and results[2] > results[4]):
-		     label = 'krishna'
-		elif(results[3] > results[0] and results[3] > results[1] and results[3] > results[2] and results[3] > results[4]):
+		elif(results[2] > results[0] and results[2] > results[1] and results[2] > results[3] and results[2] > results[4] and results[2] > results[5] and results[2] > results[6] and results[2] > results[7] and results[2] > results[8] and results[2] > results[9]):
+			label = 'krishna'
+		elif(results[3] > results[0] and results[3] > results[1] and results[3] > results[2] and results[3] > results[4] and results[3] > results[5] and results[3] > results[6] and results[3] > results[7] and results[3] > results[8] and results[3] > results[9]):
 			label = 'hari'
+		elif(results[4] > results[0] and results[4] > results[1] and results[4] > results[2] and results[4] > results[3] and results[4] > results[5] and results[4] > results[6] and results[4] > results[7] and results[4] > results[8] and results[4] > results[9]):
+			label = 'raman'
+		elif(results[5] > results[0] and results[5] > results[1] and results[3] > results[2] and results[5] > results[3] and results[5] > results[4] and results[5] > results[6] and results[5] > results[7] and results[5] > results[8] and results[5] > results[9]):
+			label = 'rohan'
+		elif(results[6] > results[0] and results[6] > results[1] and results[3] > results[2] and results[6] > results[3] and results[6] > results[4] and results[6] > results[5] and results[6] > results[7] and results[6] > results[8] and results[6] > results[9]):
+			label = 'rita'
+		elif(results[7] > results[0] and results[7] > results[1] and results[7] > results[2] and results[7] > results[3] and results[7] > results[4] and results[7] > results[5] and results[7] > results[6] and results[7] > results[8] and results[7] > results[9]):
+			label = 'gita'
+		elif(results[8] > results[0] and results[8] > results[1] and results[8] > results[2] and results[8] > results[3] and results[8] > results[4] and results[8] > results[5] and results[8] > results[6] and results[8] > results[7] and results[8] > results[9]):
+			label = 'hasina'
 		else:
 			label = 'unknown'
 		result_path  = os.path.join('results', label + str(i) + ".jpg")
