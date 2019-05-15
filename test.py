@@ -363,8 +363,6 @@ if __name__ == '__main__':
 	print(test_data.shape)
 	model  = tf.keras.models.load_model('./cnn.h5')
 	result  = model.predict(test_data)
-	y_pred_keras = keras_model.predict(X_test).ravel()
-	fpr_keras, tpr_keras, thresholds_keras = roc_curve(y_test, y_pred_keras)
 	fig=plt.figure()
 	for i in range(len(test_data)):
 		region = test_data[i]
