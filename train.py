@@ -360,7 +360,7 @@ if __name__ == '__main__':
 					# result_path  = os.path.join('temp', str(image_written) + ".jpg")
 					# cv2.imwrite(result_path, region)
 					# image_written += 1
-					region = cv2.resize(region, (256,256))
+					region = cv2.resize(region, (224,224))
 					train_data.append(region)
 					train_labels.append(label)
 		
@@ -371,22 +371,28 @@ if __name__ == '__main__':
 	print(train_labels.shape)
 
 	model = tf.keras.models.Sequential([
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=32, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
 		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
-		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
-		tf.keras.layers.Conv2D(filters=64, kernel_size=[3,3], activation=tf.nn.relu),
 		tf.keras.layers.Conv2D(filters=64, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
 		tf.keras.layers.Conv2D(filters=128, kernel_size= [3,3], activation=tf.nn.relu),
+		tf.keras.layers.Conv2D(filters=128, kernel_size= [3,3], activation=tf.nn.relu),
+		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
+		tf.keras.layers.Conv2D(filters=256, kernel_size= [3,3], activation=tf.nn.relu),
+		tf.keras.layers.Conv2D(filters=256, kernel_size= [3,3], activation=tf.nn.relu),
+		tf.keras.layers.Conv2D(filters=256, kernel_size= [3,3], activation=tf.nn.relu),
+		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
+		tf.keras.layers.Conv2D(filters=512, kernel_size=[3,3], activation=tf.nn.relu),
+		tf.keras.layers.Conv2D(filters=512, kernel_size= [3,3], activation=tf.nn.relu),
+		tf.keras.layers.Conv2D(filters=512, kernel_size= [3,3], activation=tf.nn.relu),
+		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
+		tf.keras.layers.Conv2D(filters=512, kernel_size= [3,3], activation=tf.nn.relu),
+		tf.keras.layers.Conv2D(filters=512, kernel_size= [3,3], activation=tf.nn.relu),
+		tf.keras.layers.Conv2D(filters=512, kernel_size= [3,3], activation=tf.nn.relu),
 		tf.keras.layers.MaxPooling2D(pool_size=[2,2]),
 		tf.keras.layers.Flatten(),
-		tf.keras.layers.Dense(512, activation=tf.nn.relu),
+		tf.keras.layers.Dense(4096, activation=tf.nn.relu),
+		tf.keras.layers.Dense(4096, activation=tf.nn.relu),
+		tf.keras.layers.Dense(4096, activation=tf.nn.relu),
 		tf.keras.layers.Dense(len(labels),activation=tf.nn.softmax)
 	])
 
